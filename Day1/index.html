@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v a p o r w a v e . m i x e r</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="h1">
+  <h1>v a p o r w a v e . m i x e r</h1>
+</div>
+<div class="keys">
+    <div data-key="49" class="key">
+      <kbd>1</kbd>
+      <span class="sound">windows 95 boot-up</span>
+    </div>
+    <div data-key="50" class="key">
+      <kbd>2</kbd>
+      <span class="sound">windows 95 chimes</span>
+    </div>
+    <div data-key="51" class="key">
+      <kbd>3</kbd>
+      <span class="sound">dial-up modem</span>
+    </div>
+    <div data-key="52" class="key">
+      <kbd>4</kbd>
+      <span class="sound">a soothing island song</span>
+    </div>
+    <div data-key="53" class="key">
+      <kbd>5</kbd>
+      <span class="sound">W32 Netsky-C Virus</span>
+    </div>
+    <div data-key="54" class="key">
+      <kbd>6</kbd>
+      <span class="sound">pacman when he dies</span>
+    </div>
+    <div data-key="55" class="key">
+      <kbd>7</kbd>
+      <span class="sound">motorcycle at sunset</span>
+    </div>
+    <div data-key="56" class="key">
+      <kbd>8</kbd>
+      <span class="sound">back to the future</span>
+    </div>
+    <div data-key="57" class="key">
+      <kbd>9</kbd>
+      <span class="sound">that view from space</span>
+    </div>
+  </div>
+
+  <audio data-key="49" src="wavs/95_boot_up.wav"></audio>
+  <audio data-key="50" src="wavs/95_chimes.wav"></audio>
+  <audio data-key="51" src="wavs/dial_up.wav"></audio>
+  <audio data-key="52" src="wavs/island_song.wav"></audio>
+  <audio data-key="53" src="wavs/w32_netskyc.wav"></audio>
+  <audio data-key="54" src="wavs/pacman_dies.wav"></audio>
+  <audio data-key="55" src="wavs/motorcycle.wav"></audio>
+  <audio data-key="56" src="wavs/back_to_future.wav"></audio>
+  <audio data-key="57" src="wavs/that_view.wav"></audio>
+
+<style>
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+  </style>
+
+  </body>
+  </html>
